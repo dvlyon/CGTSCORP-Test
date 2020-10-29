@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link
+} from 'react-router-dom'
 
-export default App;
+import { Layout } from 'antd'
+
+import Home from './views/Home'
+import Instructions from './views/Instructions'
+
+import 'antd/dist/antd.css'
+
+import './App.scss'
+
+const { Footer, Content } = Layout
+
+const App = () =>
+	<Router>
+		<Layout>
+			<Content>
+				<Switch>
+					<Route exact path='/'>
+						<Home />
+					</Route>
+					<Route path="/instructions">
+						<Instructions />
+					</Route>
+					<Route>
+						<NoMatch />
+					</Route>
+				</Switch>
+			</Content>
+			<Footer>
+				<ul>
+					<li>
+						<Link to="/">Inicio</Link>
+					</li>
+					<li>
+						<Link to="/instructions">Instrucctiones</Link>
+					</li>
+				</ul>
+			</Footer>
+		</Layout>
+	</Router>
+
+const NoMatch = () => <h2>404</h2>
+
+export default App
